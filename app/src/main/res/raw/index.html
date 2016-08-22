@@ -3,9 +3,10 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>quanshare</title>
-    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-    <meta name="description" content="demo" />
-<!--    <script src="./nativeShare.js"></script>-->
+    <meta name="viewport"
+          content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta name="description" content="demo"/>
+    <!--    <script src="./nativeShare.js"></script>-->
     <!-- <link rel="stylesheet" href="./nativeShare.css"/> -->
 </head>
 <body>
@@ -14,74 +15,37 @@
 <input type="button" id="parse" value="parse" onclick="parseUrl();">
 
 <table>
-<tr>
-<td>链接：</td><td><input type="text" id="url" name="url" value=""/></td>
-</tr>
-<tr>
-<td>标题：</td><td><input type="text" id="title" name="title" value=""/></td>
-</tr>            
-<tr>
-<td>描述：</td><td><input type="text" id="desc" name="desc" value=""/></td>
-</tr>
-<tr>
-<td>图片：</td><td><input type="text" id="img" name="img" value=""/></td>
-</tr>
-<tr>
-<td>图片标题：</td><td><input type="text" id="img_title" name="img_title" value="图片"/></td>
-</tr>
-<tr>
-<td>来源：</td><td><input type="text" id="from" name="from" value=""/></td>
-</tr>
+    <tr>
+        <td>链接：</td>
+        <td><input type="text" id="url" name="url" value=""/></td>
+    </tr>
+    <tr>
+        <td>标题：</td>
+        <td><input type="text" id="title" name="title" value=""/></td>
+    </tr>
+    <tr>
+        <td>描述：</td>
+        <td><input type="text" id="desc" name="desc" value=""/></td>
+    </tr>
+    <tr>
+        <td>图片：</td>
+        <td><input type="text" id="img" name="img" value=""/></td>
+    </tr>
+    <tr>
+        <td>图片标题：</td>
+        <td><input type="text" id="img_title" name="img_title" value="图片"/></td>
+    </tr>
+    <tr>
+        <td>来源：</td>
+        <td><input type="text" id="from" name="from" value=""/></td>
+    </tr>
 </table>
 
 <div id="nativeShare"></div>
-<script>
-function getQueryStringArgs(url){
-	var tempurl = decodeURIComponent(url);
-	var fromIndex = url.indexOf("?");
-	 fromIndex = fromIndex > 0 ? fromIndex + 1:0;
-	 tempurl = tempurl.substring(fromIndex);
-	var qs = tempurl
-	var args = {};
-	var items = qs.split("&");
-	var item = null,    name=null,    value=null;
-	for(var i=0;i<items.length;i++){item=items[i].split("=");
-		name=item[0];
-		value=item[1];
-		args[name]=value;
-	}
-	return args;
-}
 
-
-function parseUrl(){
-var inputUrl = document.getElementById("inputUrl").value;
-var args = getQueryStringArgs(inputUrl);
-
-document.getElementById("url").value = "http://wx.yihu.so/cm_details.php?shopName=%E6%89%8B%E6%9C%BA%E5%A4%A9%E7%8C%AB%E5%95%86%E5%93%81%E8%AF%A6%E6%83%85&shop_type=tmall&Advertisement=&small_shop_type=cm_details&buyers_wechat_code=&tbk_y_url="+args["targetUrl"];
-
-document.getElementById("title").value = args["title"];
-// price
-document.getElementById("img").value = args["imageUrl"];
-var taoToken = args["taoTokenContent"];
-var ret ;
-if(taoToken != null && taoToken != ''){
-    var reg = new RegExp("【(.+?)元】");
-    ret = taoToken.match(reg);
-}
-
-var money = "";
-if(ret != null){
-    money = ret[1];
-}
-var desc = "售价："+money+"。淘宝商品，进去后点击右上角－>在浏览器中打开。";
-document.getElementById("desc").value = desc;
-}
-
-</script>
 
 <script>
-    /**
+/**
  * Created by Jeffery Wang.
  * Create Time: 2015-06-16 19:52
  * Author Link: http://blog.wangjunfeng.com
@@ -92,8 +56,8 @@ var nativeShare = function (elementNode, config) {
     }
 
     var qApiSrc = {
-        lower: "//3gimg.qq.com/html5/js/qb.js",
-        higher: "//jsapi.qq.com/get?api=app.share"
+        lower: "http://3gimg.qq.com/html5/js/qb.js",
+        higher: "http://jsapi.qq.com/get?api=app.share"
     };
     var bLevel = {
         qq: {forbid: 0, lower: 1, higher: 2},
@@ -170,19 +134,6 @@ var nativeShare = function (elementNode, config) {
         }
     };
 
-    // this.html = function() {
-    //     var position = document.getElementById(this.elementNode);
-    //     var html = '<div class="label">分享到</div>'+
-    //         '<div class="list clearfix">'+
-    //         '<span data-app="sinaWeibo" class="nativeShare weibo"><i></i>新浪微博</span>'+
-    //         '<span data-app="weixin" class="nativeShare weixin"><i></i>微信好友</span>'+
-    //         '<span data-app="weixinFriend" class="nativeShare weixin_timeline"><i></i>微信朋友圈</span>'+
-    //         '<span data-app="QQ" class="nativeShare qq"><i></i>QQ好友</span>'+
-    //         '<span data-app="QZone" class="nativeShare qzone"><i></i>QQ空间</span>'+
-    //         '<span data-app="" class="nativeShare more"><i></i>更多</span>'+
-    //         '</div>';
-    //     position.innerHTML = html;
-    // };
     this.html = function() {
         var position = document.getElementById(this.elementNode);
         var html = '<div class="label">分享到</div>'+
@@ -248,7 +199,6 @@ var nativeShare = function (elementNode, config) {
         if (isqqBrowser || isucBrowser) {
             this.html();
         } else {
-            this.html();    
             document.write('目前该分享插件仅支持手机UC浏览器和QQ浏览器');
         }
     };
@@ -271,13 +221,10 @@ var nativeShare = function (elementNode, config) {
 
     return this;
 };
-
-    </script>
-
-
-    <script>
+</script>
 
 
+<script>
         var url = document.getElementById("url").value;
         var title = document.getElementById("title").value;
         var desc = document.getElementById("desc").value;
@@ -296,7 +243,52 @@ var nativeShare = function (elementNode, config) {
         var share = new nativeShare('nativeShare',config);
             
            
-     </script>
-     
+
+</script>
+<script>
+function getQueryStringArgs(url){
+	var tempurl = decodeURIComponent(url);
+	var fromIndex = url.indexOf("?");
+	 fromIndex = fromIndex > 0 ? fromIndex + 1:0;
+	 tempurl = tempurl.substring(fromIndex);
+	var qs = tempurl
+	var args = {};
+	var items = qs.split("&");
+	var item = null,    name=null,    value=null;
+	for(var i=0;i<items.length;i++){item=items[i].split("=");
+		name=item[0];
+		value=item[1];
+		args[name]=value;
+	}
+	return args;
+}
+
+
+function parseUrl(){
+var inputUrl = document.getElementById("inputUrl").value;
+var args = getQueryStringArgs(inputUrl);
+
+document.getElementById("url").value = "http://wx.yihu.so/cm_details.php?shopName=%E6%89%8B%E6%9C%BA%E5%A4%A9%E7%8C%AB%E5%95%86%E5%93%81%E8%AF%A6%E6%83%85&shop_type=tmall&Advertisement=&small_shop_type=cm_details&buyers_wechat_code=&tbk_y_url="+args["targetUrl"];
+
+document.getElementById("title").value = args["title"];
+// price
+document.getElementById("img").value = args["imageUrl"];
+var taoToken = args["taoTokenContent"];
+var ret ;
+if(taoToken != null && taoToken != ''){
+    var reg = new RegExp("【(.+?)元】");
+    ret = taoToken.match(reg);
+}
+
+var money = "";
+if(ret != null){
+    money = ret[1];
+}
+var desc = "售价："+money+"。淘宝商品，进去后点击右上角－>在浏览器中打开。";
+document.getElementById("desc").value = desc;
+}
+
+
+</script>
 </body>
 </html>

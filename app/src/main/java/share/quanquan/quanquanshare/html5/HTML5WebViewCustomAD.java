@@ -58,14 +58,14 @@ public class HTML5WebViewCustomAD extends BaseActivity {
         });
 
         //准备javascript注入
-//        mWebView.addJavascriptInterface(new Js2JavaInterface(), "Js2JavaInterface");
-//        if (savedInstanceState != null) {
-//            mWebView.restoreState(savedInstanceState);
-//        } else {
+        mWebView.addJavascriptInterface(new Js2JavaInterface(), "Js2JavaInterface");
+        if (savedInstanceState != null) {
+            mWebView.restoreState(savedInstanceState);
+        } else {
             if (url != null) {
                 mWebView.loadUrl(url);
             }
-//        }
+        }
         setContentView(mWebView.getLayout());
 
     }
