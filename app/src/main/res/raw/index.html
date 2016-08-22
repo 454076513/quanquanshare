@@ -268,7 +268,7 @@ function parseUrl(){
 var inputUrl = document.getElementById("inputUrl").value;
 var args = getQueryStringArgs(inputUrl);
 
-document.getElementById("url").value = "http://wx.yihu.so/cm_details.php?shopName=%E6%89%8B%E6%9C%BA%E5%A4%A9%E7%8C%AB%E5%95%86%E5%93%81%E8%AF%A6%E6%83%85&shop_type=tmall&Advertisement=&small_shop_type=cm_details&buyers_wechat_code=&tbk_y_url="+args["targetUrl"];
+document.getElementById("url").value = "http://wx.yihu.so/cm_details.php?shopName=%E6%89%8B%E6%9C%BA%E5%A4%A9%E7%8C%AB%E5%95%86%E5%93%81%E8%AF%A6%E6%83%85&shop_type=tmall&Advertisement=&small_shop_type=cm_details&buyers_wechat_code=&shopUrl="+args["id"]+"&tbk_y_url="+args["targetUrl"];
 
 document.getElementById("title").value = args["title"];
 // price
