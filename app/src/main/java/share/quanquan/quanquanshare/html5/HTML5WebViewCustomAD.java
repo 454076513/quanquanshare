@@ -44,6 +44,8 @@ public class HTML5WebViewCustomAD extends BaseActivity {
         switch (type){
             case TypeC.TAOBAO_UNION:mWebView.setWebViewClient(new TaobaoUnionWebView(mWebView));break;
             case TypeC.JINGXIANGJIE:mWebView.setWebViewClient(new JingXiangJieWebView(mWebView));break;
+            default:
+
         }
         mWebView.setDownloadListener(new DownloadListener() {
             @Override

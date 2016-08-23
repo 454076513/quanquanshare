@@ -138,10 +138,13 @@ public class TaobaoUnionWebView extends HTML5CustomWebView.AbstractWebViewClient
             Map<String,String> data = new HashMap<String,String>();
             data.put("content",content);
             String writeData = TemplateUtil.composeMessage(template,data);
+            String filePath = helper.getFILESPATH()+ "/"+ fileName;
+            if(helper.hasSD()){
+                filePath = helper.getSDPATH()+ "/"+ fileName;
+            }
+            helper.writeFile(writeData, filePath);
 
-            helper.writeSDFile(writeData, fileName);
-            String address = "file://" + helper.getSDPATH() + "/" + fileName;
-            choiceBrowserToVisitUrl(address);
+            choiceBrowserToVisitUrl( "file://"+filePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -194,6 +197,7 @@ public class TaobaoUnionWebView extends HTML5CustomWebView.AbstractWebViewClient
             intent.setAction(Intent.ACTION_VIEW);
             intent.addCategory(Intent.CATEGORY_DEFAULT);
             intent.setData(Uri.parse(url));
+//            FDApplication.getInstance().startActivity(intent);
             wv.getmActivity().startActivity(intent);
         } catch (Exception e) {
             // 在1.5及以前版本会要求catch(android.content.pm.PackageManager.NameNotFoundException)异常，该异常在1.5以后版本已取消。

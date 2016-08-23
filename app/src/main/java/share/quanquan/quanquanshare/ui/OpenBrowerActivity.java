@@ -65,27 +65,30 @@ public class OpenBrowerActivity extends BaseActivity {
 
 
         final String fileName = "index.html";
-        try {
-            createFileTextView.setText("创建文件："
-                    + helper.createSDFile(fileName).getAbsolutePath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
 
         String template = helper.readInputStream(getResources().openRawResource(R.raw.index));
         Map<String,String> data = new HashMap<String,String>();
         data.put("content","safsafd");
         String writeData = TemplateUtil.composeMessage(template,data);
-
-        helper.writeSDFile(writeData, fileName);
+        String filePath = helper.getFILESPATH()+ "/"+ fileName;
+        if(helper.hasSD()){
+            filePath = helper.getSDPATH()+ "/"+ fileName;
+        }
+        helper.writeFile(writeData, filePath);
 
         Button browerBtn = (Button) findViewById(R.id.brower);
         browerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String address = "file://" + helper.getSDPATH()+ "/"+ fileName;
+                String address = "";
+                if(helper.hasSD()){
+                    address = "file://" + helper.getSDPATH()+ "/"+ fileName;
+                }else {
+                    address = "file://" + helper.getFILESPATH()+ "/"+ fileName;
 
+                }
                 Uri uri = Uri.parse(address.trim());
                 Intent urlintent = new Intent(Intent.ACTION_VIEW, uri);
                 if (urlintent.resolveActivity(getPackageManager()) != null) {

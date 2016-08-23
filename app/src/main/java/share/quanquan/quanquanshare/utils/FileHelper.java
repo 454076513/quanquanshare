@@ -98,23 +98,27 @@ public class FileHelper {
      */
     public void writeSDFile(String str, String fileName) {
         try {
-//            FileWriter fw = new FileWriter(SDPATH + "//" + fileName);
-            File f = new File(SDPATH + "//" + fileName);
-//            fw.write(str);
-//            FileOutputStream os = new FileOutputStream(f);
-//            DataOutputStream out = new DataOutputStream(os);
-//            out.writeShort(2);
-//            out.writeUTF("");
-//            System.out.println(out);
-//            fw.flush();
-//            fw.close();
-//            System.out.println(fw);
+            writeFile(str,SDPATH + "//" + fileName);
+        } catch (Exception e) {
+           Log.e("quanquanshare","File write error.");
+        }
+    }
 
-            FileOutputStream stream = new FileOutputStream(f);
+    /**
+     * 写入内容
+     * str为内容
+     */
+    public void writeFile(String str, String filePath) {
+        try {
+            File file = new File(filePath);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileOutputStream stream = new FileOutputStream(file);
             stream.write(str.getBytes());
             stream.close();
         } catch (Exception e) {
-           Log.e("quanquanshare","File write error.");
+            Log.e("quanquanshare","File write error."+e.toString());
         }
     }
 
@@ -188,6 +192,7 @@ public class FileHelper {
     }
 
     public boolean hasSD() {
+//        return false;
         return hasSD;
     }
 }

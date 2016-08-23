@@ -344,7 +344,20 @@ public class HTML5CustomWebView extends WebView {
     private  class DefaultViewClient extends AbstractWebViewClient {
 
         @Override
-        protected boolean overideUrl(WebView view, String url) {return false;}
+        protected boolean overideUrl(WebView view, String url) {
+            Uri uri = Uri.parse(url);
+            List<String> browerList = new ArrayList<String>();
+            browerList.add("http");
+            browerList.add("https");
+            browerList.add("about");
+            browerList.add("javascript");
+            if (browerList.contains(uri.getScheme())) {
+                return false;
+            }else{
+                return true;
+            }
+
+        }
 
     }
 }
